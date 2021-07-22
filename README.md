@@ -80,7 +80,7 @@ viewModelScope.launch {
 
 Error handling?
 -------------------
-All known error is caught a put in a Failure, so trowables can be handled like this:
+All known error is caught and put in a Failure, so trowables can be handled like this:
 ```kotlin
 fun handleThrowable(throwable: Throwable) {
     when (throwable) {
