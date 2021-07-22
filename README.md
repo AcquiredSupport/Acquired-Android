@@ -7,15 +7,14 @@ Use gradle to download the SDK
 
 ```gradle
 repositories {
-        maven {
-            url = uri("https://maven.pkg.github.com/AcquiredSupport/Acquired-Android")
-            credentials {
-                username = USERNAME
-                password = TOKEN
-            }
+    maven {
+        url = uri("https://maven.pkg.github.com/AcquiredSupport/Acquired-Android")
+        credentials {
+            username = USERNAME
+            password = TOKEN
         }
-
     }
+}
 
 dependencies {
   implementation 'com.acquired.paymentgateway:paymentgateway:VERSION'
