@@ -1,9 +1,15 @@
 # Acquired-Android
 
-Download
---------
+## Description
+The Acquired-Android SDK allows you to easily and securely integrate Google Pay into your Android app.
 
-Use gradle to download the SDK
+## Requirements
+- Android 
+- Android Gradle Plugin
+- Gradle 
+
+## Install the SDK
+Use gradle to install this SDK.
 
 ```gradle
 repositories {
@@ -21,10 +27,9 @@ dependencies {
 }
 ```
 
-How do I use the Payment Gateway?
--------------------
+## How to use the SDK
 
-
+### Configuration
 Create an instance of the PaymentGateway with a configuration:
 ```kotlin
 val configuration = Configuration(
@@ -32,14 +37,14 @@ val configuration = Configuration(
     companyPass = "re3vKdCG",
     companyHash = "cXaFMLbH",
     companyMidId = "1687",
-    baseUrlAddress = URL("https://qaapi2.acquired.com/"),
+    baseUrlAddress = URL("https://qaapi.acquired.com/"),
     requestRetryAttempts = 3
 )
 
 val paymentGateway = PaymentGateway(configuration)
 ```
-
-Get the payment data:
+### Start the Payment
+Get the payment data as configured in the Hub:
 ```kotlin
 viewModelScope.launch {
     paymentGateway.getPayment().fold(
@@ -53,7 +58,7 @@ viewModelScope.launch {
 }
 ```
 
-Start a payment by  creating a Transaction object and using a paymentMethod from the paymentData. The amount is sent in cents:
+Start a payment by creating a Transaction object and using a paymentMethod from the paymentData. The amount is sent in cents:
 ```kotlin
 val transaction = Transaction(
     transactionType = TransactionType.AUTH_CAPTURE,
