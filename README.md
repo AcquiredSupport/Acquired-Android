@@ -26,6 +26,21 @@ dependencies {
   implementation 'com.acquired.paymentgateway:paymentgateway:VERSION'
 }
 ```
+## Getting Started
+
+Contact support@acquired.com to get started using the SDK. You will need the required configuration details as well as access to our backoffice. 
+
+Once you've got this, the SDK can be fully configured within the [Acquired.com Hub](https://qahub.acquired.com) allowing you to define what is supported and should be requested from the user on the payment sheet. For GogolePay this includes:
+
+- Supported Card Networks (Visa, MasterCard, Amex)
+- Supported Card Types (Credit, Debit, Prepaid)
+- Required Billing Data (Address, Email, Phone)
+- Required Shipping Data (Address, Email, Phone)
+
+Changes can be easily made to your configuration and payment page without the need to update or release your app.
+
+## Examples
+Take a look at at the [Acquired-Android-ExampleApp](https://github.com/AcquiredSupport/Acquired-Android-ExampleApp) for an example implementation of the SDK.
 
 ## How to use the SDK
 
@@ -43,8 +58,8 @@ val configuration = Configuration(
 
 val paymentGateway = PaymentGateway(configuration)
 ```
-### Start the Payment
-Get the payment data as configured in the Hub:
+### Payment Data
+Get the available payment methods and required configuration data as configured in the Hub:
 ```kotlin
 viewModelScope.launch {
     paymentGateway.getPayment().fold(
@@ -57,8 +72,8 @@ viewModelScope.launch {
     )
 }
 ```
-
-Start a payment by creating a Transaction object and using a paymentMethod from the paymentData. The amount is sent in cents:
+### Start a Payment
+Create a Transaction object and using a paymentMethod from the paymentData process a payment. The amount is set in cents:
 ```kotlin
 val transaction = Transaction(
     transactionType = TransactionType.AUTH_CAPTURE,
@@ -83,9 +98,9 @@ viewModelScope.launch {
 }
 ```
 
-Error handling?
--------------------
-All known error is caught and put in a Failure, so trowables can be handled like this:
+## Error handling
+
+All known errors are caught and put in a Failure by the SDK, so trowables can be handled like this:
 ```kotlin
 fun handleThrowable(throwable: Throwable) {
     when (throwable) {
@@ -97,7 +112,7 @@ fun handleThrowable(throwable: Throwable) {
 }
 ```
 
-General Failures
+### General Failures
 ```kotlin
 fun handleFailure(failure: Failure) {
     when(failure) {
@@ -111,7 +126,7 @@ fun handleFailure(failure: Failure) {
 }
 ```
 
-Specific Failures
+### Specific Failures
 ```kotlin
 fun handlePaymentAuthorizationFailure(failure: PaymentAuthorizationFailure) {
     when (failure) {
